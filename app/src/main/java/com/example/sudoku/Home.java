@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Home extends AppCompatActivity {
 
-    String[]  item = {"Very easy","Design","Hamma"};
+    String[]  item = {"Easy","Medium","Hard"};
     AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String> adapterItems;
 

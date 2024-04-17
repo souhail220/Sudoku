@@ -22,7 +22,7 @@ public class GameView extends View implements GestureDetector.OnGestureListener 
 
     GestureDetector gestureDetector;
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final GameBoard gameBoard = GameBoard.getGameBoard(GameLevel.Medium);
+    private final GameBoard gameBoard = GameBoard.getGameBoard("Medium");
 
     private final int[] buttonsTable = new int[9];
     private float gridWidth;
