@@ -6,6 +6,10 @@
     <string name="textview">TextView</string>
     <string name="play_bold">PLAY</string>
     <string name="select_level">Select Level</string>
+    <string name="YouWin">You Win</string>
+    <string name="do_you_want_to_return_home">Do you want to return home?</string>
+    <string name="home">Home</string>
+    <string name="replay">Replay</string>
     <string-array name="languages">
         <item>English</item>
         <item>German</item>

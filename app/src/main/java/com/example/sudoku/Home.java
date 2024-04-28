@@ -2,26 +2,27 @@ package com.example.sudoku;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+
 public class Home extends AppCompatActivity {
+
 
     String[]  item = {"Easy","Medium","Hard"};
     AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String> adapterItems;
 
-    String selectedItem;
+    static String selectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,5 +52,9 @@ public class Home extends AppCompatActivity {
     public void playActivity(View v){
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+    }
+
+    public void leadboardActivity(View view){
+
     }
 }

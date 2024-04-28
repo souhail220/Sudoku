@@ -1,22 +1,39 @@
 package com.example.sudoku;
-import java.lang.*;
+
+import java.util.Random;
 
 public class Sudoku {
-    static int[][] mat;
+
+    public static class Mat {
+        public int value;
+        public boolean initialised;
+
+        public Mat(int value, boolean initialised) {
+            this.value = value;
+            this.initialised = initialised;
+        }
+
+        public Mat(int value) {
+            this.value = value;
+            this.initialised = false;
+        }
+    }
+
+    static Mat[][] mat;
     int N; // number of columns/rows.
     int SRN; // square root of N
 
     // Constructor
-    public Sudoku(int N)
-    {
+    public Sudoku(int N) {
         this.N = N;
         // Compute square root of N
         SRN = (int) Math.sqrt(N);
-        mat = new int[N][N];
-    }
-
-    public Sudoku() {
-
+        mat = new Mat[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                mat[i][j] = new Mat(0);
+            }
+        }
     }
 
     // Sudoku Generator
@@ -32,7 +49,7 @@ public class Sudoku {
 
     // Fill the diagonal SRN number of SRN x SRN matrices
     private void fillDiagonal() {
-        for (int i = 0; i<N; i=i+SRN){
+        for (int i = 0; i < N; i = i + SRN) {
             // for diagonal box, start coordinates->i==j
             fillBox(i, i);
         }
@@ -40,9 +57,9 @@ public class Sudoku {
 
     // Returns false if given 3 x 3 block contains num.
     private boolean unUsedInBox(int rowStart, int colStart, int num) {
-        for (int i = 0; i<SRN; i++) {
+        for (int i = 0; i < SRN; i++) {
             for (int j = 0; j < SRN; j++) {
-                if (mat[rowStart + i][colStart + j] == num) {
+                if (mat[rowStart + i][colStart + j].value == num) {
                     return false;
                 }
             }
@@ -51,44 +68,44 @@ public class Sudoku {
     }
 
     // Fill a 3 x 3 matrix.
-    private void fillBox(int row,int col) {
+    private void fillBox(int row, int col) {
         int num;
-        for (int i=0; i<SRN; i++) {
-            for (int j=0; j<SRN; j++) {
+        for (int i = 0; i < SRN; i++) {
+            for (int j = 0; j < SRN; j++) {
                 do {
                     num = randomGenerator(N);
-                }
-                while (!unUsedInBox(row, col, num));
+                } while (!unUsedInBox(row, col, num));
 
-                mat[row+i][col+j] = num;
+                mat[row + i][col + j].value = num;
             }
         }
     }
 
     // Random generator
     private int randomGenerator(int num) {
-        return (int) Math.floor((Math.random()*num+1));
+        Random rand = new Random();
+        return rand.nextInt(num) + 1;
     }
 
     // Check if safe to put in cell
-    private boolean CheckIfSafe(int i,int j,int num) {
+    private boolean CheckIfSafe(int i, int j, int num) {
         return (unUsedInRow(i, num) &&
                 unUsedInCol(j, num) &&
-                unUsedInBox(i-i%SRN, j-j%SRN, num));
+                unUsedInBox(i - i % SRN, j - j % SRN, num));
     }
 
     // check in the row for existence
-    private boolean unUsedInRow(int i,int num) {
-        for (int j = 0; j<N; j++)
-            if (mat[i][j] == num)
+    private boolean unUsedInRow(int i, int num) {
+        for (int j = 0; j < N; j++)
+            if (mat[i][j].value == num)
                 return false;
         return true;
     }
 
     // check in the row for existence
-    private boolean unUsedInCol(int j,int num) {
-        for (int i = 0; i<N; i++)
-            if (mat[i][j] == num)
+    private boolean unUsedInCol(int j, int num) {
+        for (int i = 0; i < N; i++)
+            if (mat[i][j].value == num)
                 return false;
         return true;
     }
@@ -96,39 +113,36 @@ public class Sudoku {
     // A recursive function to fill remaining
     // matrix
     private boolean fillRemaining(int i, int j) {
-        //  System.out.println(i+" "+j);
-        if (j>=N && i<N-1) {
+        if (j >= N && i < N - 1) {
             i = i + 1;
             j = 0;
         }
-        if (i>=N && j>=N){
+        if (i >= N && j >= N) {
             return true;
         }
 
         if (i < SRN) {
             if (j < SRN)
                 j = SRN;
-        }
-        else if (i < N-SRN) {
-            if (j==(int)(i/SRN)*SRN)
-                j =  j + SRN;
-        }
-        else {
-            if (j == N-SRN) {
+        } else if (i < N - SRN) {
+            if (j == (int) (i / SRN) * SRN)
+                j = j + SRN;
+        } else {
+            if (j == N - SRN) {
                 i = i + 1;
                 j = 0;
-                if (i>=N)
+                if (i >= N)
                     return true;
             }
         }
 
-        for (int num = 1; num<=N; num++) {
+        for (int num = 1; num <= N; num++) {
             if (CheckIfSafe(i, j, num)) {
-                mat[i][j] = num;
-                if (fillRemaining(i, j+1))
+                mat[i][j].value = num;
+                if (fillRemaining(i, j + 1))
                     return true;
 
-                mat[i][j] = 0;
+                mat[i][j].value = 0;
             }
         }
         return false;

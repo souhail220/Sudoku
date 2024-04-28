@@ -22,7 +22,7 @@ public class GameView extends View implements GestureDetector.OnGestureListener 
 
     GestureDetector gestureDetector;
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final GameBoard gameBoard = GameBoard.getGameBoard("Medium");
+    private final GameBoard gameBoard = GameBoard.getGameBoard(Home.selectedItem);
 
     private final int[] buttonsTable = new int[9];
     private float gridWidth;
@@ -418,6 +418,7 @@ public class GameView extends View implements GestureDetector.OnGestureListener 
             paint.setColor(Color.GRAY);
             RectF rectF = new RectF(buttonLeft,buttonsTop,buttonLeft + buttonWidth*2,buttonsTop + buttonWidth*2);
             canvas.drawText("VICTORY",rectF.centerX(),rectF.top + rectF.height() * 0.75f,paint);
+            MainActivity.showDialog();
         }
     }
 }
