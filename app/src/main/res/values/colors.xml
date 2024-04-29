@@ -5,4 +5,6 @@
     <color name="blue">#0000FF</color>
     <color name="red">#FF0000</color>
     <color name="violet">#AA5DF8</color>
+    <color name="baige">#f9debd</color>
+    <color name="tanAccent">#d1d1d1</color>
 </resources>

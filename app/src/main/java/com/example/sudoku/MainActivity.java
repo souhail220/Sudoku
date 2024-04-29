@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -62,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static void showDialog(){
         dialog.show();
+        TextView gameScore = dialog.findViewById(R.id.gameScore);
+        String string = (String) gameScore.getText() + GameView.score;
+        gameScore.setText(string);
     }
 
 }

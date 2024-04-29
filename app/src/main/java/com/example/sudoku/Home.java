@@ -55,6 +55,7 @@ public class Home extends AppCompatActivity {
     }
 
     public void leadboardActivity(View view){
-
+        Intent i = new Intent(this, Leadboard.class);
+        startActivity(i);
     }
 }

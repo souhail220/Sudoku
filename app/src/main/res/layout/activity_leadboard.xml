@@ -8,11 +8,83 @@
     android:layout_height="match_parent"
     tools:context=".Leadboard">
 
+  <androidx.cardview.widget.CardView
+      android:id="@+id/cardView"
+      android:layout_width="match_parent"
+      android:layout_height="140dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      app:cardBackgroundColor="@color/baige"
+      app:cardCornerRadius="20dp"
+      app:layout_constraintBottom_toTopOf="@+id/myRecyclerView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <TextView
+          android:id="@+id/textView6"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:text="@string/leadboard"
+          android:textSize="20sp"
+          android:textStyle="bold"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <Button
+          android:id="@+id/userLabel"
+          android:layout_width="149dp"
+          android:layout_height="50dp"
+          android:gravity="center"
+          android:text="@string/connect"
+          android:textSize="20sp"
+          android:textStyle="bold"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.627"
+          app:layout_constraintStart_toEndOf="@+id/editTextUserName"
+          app:layout_constraintTop_toBottomOf="@+id/textView6"
+          app:layout_constraintVertical_bias="0.563"
+          tools:ignore="RtlSymmetry" />
+
+      <EditText
+          android:id="@+id/editTextUserName"
+          android:layout_width="187dp"
+          android:layout_height="50dp"
+          android:layout_marginEnd="64dp"
+          android:autofillHints="SouhailKing"
+          android:background="@color/white"
+          android:ems="10"
+          android:hint="@string/enter_username"
+          android:inputType="text"
+          android:labelFor="@+id/userLabel"
+          android:paddingStart="30dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintCircleRadius="100dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.126"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/textView6"
+          app:layout_constraintVertical_bias="0.563"
+          tools:ignore="LabelFor,RtlSymmetry" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.cardview.widget.CardView>
+
   <androidx.recyclerview.widget.RecyclerView
-      android:layout_width="409dp"
-      android:layout_height="912dp"
+      android:id="@+id/myRecyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="600dp"
+      android:layout_marginTop="8dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toBottomOf="@+id/cardView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

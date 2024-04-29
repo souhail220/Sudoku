@@ -2,7 +2,6 @@ package com.example.sudoku;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -18,6 +17,10 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class GameView extends View implements GestureDetector.OnGestureListener {
 
     GestureDetector gestureDetector;
@@ -26,18 +29,31 @@ public class GameView extends View implements GestureDetector.OnGestureListener 
 
     private final int[] buttonsTable = new int[9];
     private float gridWidth;
+    @SuppressLint("SimpleDateFormat")
+    private DateFormat dfs = new SimpleDateFormat("ss");
+    @SuppressLint("SimpleDateFormat")
+    private final DateFormat dfm = new SimpleDateFormat("mm");
+    @SuppressLint("SimpleDateFormat")
+    private final DateFormat dfh = new SimpleDateFormat("h");
+    private String T1h;
+    private String T1m;
+    private String T1s;
     private float gridSeparatorSize;
     private float cellWidth;
     private float buttonWidth;
     private float buttonRadius;
     private float buttonMargin;
+    public static int score;
     Bitmap eraserBitmap;
     Bitmap pencilBitmap;
     Bitmap littlePencilBitmap;
 
+
+
     public GameView(Context context) {
         super(context);
         this.init();
+
     }
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
@@ -47,6 +63,9 @@ public class GameView extends View implements GestureDetector.OnGestureListener 
 
     private void init(){
         gestureDetector = new GestureDetector(getContext(), this);
+        T1s = dfs.format(Calendar.getInstance().getTime());
+        T1m = dfm.format(Calendar.getInstance().getTime());
+        T1h = dfh.format(Calendar.getInstance().getTime());
     }
 
     @Override
@@ -74,6 +93,7 @@ public class GameView extends View implements GestureDetector.OnGestureListener 
         for(int i=0;i<9;i++){
             buttonsTable[i]=0;
         }
+
         drawGrid(canvas);
         drawSelectedCellHighlight(canvas);
         drawButtons(canvas);
@@ -413,11 +433,10 @@ public class GameView extends View implements GestureDetector.OnGestureListener 
             }
         }
         if(test){
-            float buttonLeft = buttonMargin * 16;
-            float buttonsTop = gridWidth + gridSeparatorSize/2 + buttonWidth *4;
-            paint.setColor(Color.GRAY);
-            RectF rectF = new RectF(buttonLeft,buttonsTop,buttonLeft + buttonWidth*2,buttonsTop + buttonWidth*2);
-            canvas.drawText("VICTORY",rectF.centerX(),rectF.top + rectF.height() * 0.75f,paint);
+            String t2s = dfs.format(Calendar.getInstance().getTime());
+            String t2m = dfm.format(Calendar.getInstance().getTime());
+            String t2h = dfh.format(Calendar.getInstance().getTime());
+            score=(Integer.parseInt(t2h)-Integer.parseInt(T1h))*3600+(Integer.parseInt(t2m)-Integer.parseInt(T1m))*60+(Integer.parseInt(t2s)-Integer.parseInt(T1s));
             MainActivity.showDialog();
         }
     }

@@ -10,9 +10,27 @@
     <string name="do_you_want_to_return_home">Do you want to return home?</string>
     <string name="home">Home</string>
     <string name="replay">Replay</string>
+    <string name="textview1">TextView</string>
+    <string name="leadboard">Leadboard</string>
+    <string name="your_score">Your score :</string>
+    <string name="enter_username">Enter username</string>
+    <string name="username">Username</string>
+    <string name="connect">Connect</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="register_upp">REGISTER</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
     <string-array name="languages">
         <item>English</item>
         <item>German</item>
         <item>French</item>
+    </string-array>
+    <string-array name="userNames">
+        <item>Hamma</item>
+        <item>Dali</item>
+        <item>Khalil</item>
+        <item>Youssef</item>
+        <item>Narbi</item>
     </string-array>
 </resources>
