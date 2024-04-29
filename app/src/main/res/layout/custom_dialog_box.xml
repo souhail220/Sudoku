@@ -52,20 +52,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/dialog_button_replay"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="100"
-                android:backgroundTint="@color/white"
-                android:padding="12dp"
-                android:text="@string/replay"
-                android:textColor="@color/violet"
-                android:textSize="12sp"
-                app:strokeColor="@color/violet"
-                app:strokeWidth="2dp" />
-
-            <com.google.android.material.button.MaterialButton
                 android:id="@+id/dialog_button_home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

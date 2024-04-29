@@ -77,7 +77,7 @@ public class Register extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w("TAG", "createUserWithEmail:failure", task.getException());
-                                Log.d("yacine", "failuer");
+                                Log.d("yacine", "failed");
                                 Toast.makeText(Register.this, "Authentication failed.",
                                         Toast.LENGTH_LONG).show();
                             }

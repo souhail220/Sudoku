@@ -2,12 +2,11 @@ package com.example.sudoku;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -40,12 +39,9 @@ public class Home extends AppCompatActivity {
 
         autoCompleteTextView.setAdapter(adapterItems);
 
-        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                selectedItem = adapterView.getItemAtPosition(position).toString();
-                Toast.makeText(Home.this,"Item" + selectedItem,Toast.LENGTH_SHORT).show();
-            }
+        autoCompleteTextView.setOnItemClickListener((adapterView, view, position, id) -> {
+            selectedItem = adapterView.getItemAtPosition(position).toString();
+            Toast.makeText(Home.this,"Item" + selectedItem,Toast.LENGTH_SHORT).show();
         });
     }
 
