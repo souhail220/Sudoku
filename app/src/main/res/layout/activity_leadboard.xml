@@ -40,8 +40,8 @@
 
       <Button
           android:id="@+id/userLabel"
-          android:layout_width="149dp"
-          android:layout_height="50dp"
+          android:layout_width="161dp"
+          android:layout_height="55dp"
           android:gravity="center"
           android:text="@string/connect"
           android:textSize="20sp"

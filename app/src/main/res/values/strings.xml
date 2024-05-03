@@ -21,6 +21,11 @@
     <string name="register_upp">REGISTER</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="you_already_have_an_acount">You already have an acount?</string>
+    <string name="you_already_have_an_account">You already have an account?</string>
+    <string name="login_now">Login Now</string>
+    <string name="you_don_t_have_account">You don\'t have account?</string>
+    <string name="register_now">Register Now</string>
     <string-array name="languages">
         <item>English</item>
         <item>German</item>
@@ -33,4 +38,7 @@
         <item>Youssef</item>
         <item>Narbi</item>
     </string-array>
+    <string name="logout">Logout</string>
+    <string name="you_highest_score">You Highest Score</string>
+    <string name="___">_ _ _</string>
 </resources>

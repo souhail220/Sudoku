@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -31,6 +32,7 @@ public class Register extends AppCompatActivity {
     TextInputEditText editEmail,editPassword;
     Button buttonReg;
     ProgressBar progressBar;
+    TextView loginNow;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,12 @@ public class Register extends AppCompatActivity {
         editPassword = findViewById(R.id.password);
         buttonReg = findViewById(R.id.registerButton);
         progressBar = findViewById(R.id.progressBar);
+        loginNow = findViewById(R.id.loginNow);
+
+        loginNow.setOnClickListener(v -> {
+            Intent i = new Intent(getApplicationContext(), Login.class);
+            startActivity(i);
+        });
 
         buttonReg.setOnClickListener(v -> {
             progressBar.setVisibility(View.VISIBLE);

@@ -1,10 +1,14 @@
 package com.example.sudoku;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -16,13 +20,16 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Home extends AppCompatActivity {
 
-
+    String userName;
+    TextView highestScore;
+    int score;
     String[]  item = {"Easy","Medium","Hard"};
     AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String> adapterItems;
 
     static String selectedItem;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +41,20 @@ public class Home extends AppCompatActivity {
             return insets;
         });
 
+        score = MainActivity.highestScore;
+
+        highestScore = findViewById(R.id.highestScore);
+        if(score != 0){
+            highestScore.setText(score);
+        }
+        EditText name = findViewById(R.id.editTextUserName);
+        try {
+            userName = name.getText().toString();
+        } catch (Exception ignored) {
+        }
+
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
-        adapterItems = new ArrayAdapter<String>(this,R.layout.list_item,item);
+        adapterItems = new ArrayAdapter<>(this, R.layout.list_item, item);
 
         autoCompleteTextView.setAdapter(adapterItems);
 
@@ -43,10 +62,13 @@ public class Home extends AppCompatActivity {
             selectedItem = adapterView.getItemAtPosition(position).toString();
             Toast.makeText(Home.this,"Item" + selectedItem,Toast.LENGTH_SHORT).show();
         });
+
     }
 
     public void playActivity(View v){
         Intent i = new Intent(this, MainActivity.class);
+        i.putExtra("name",userName);
+        i.putExtra("score",String.valueOf(highestScore));
         startActivity(i);
     }
 
