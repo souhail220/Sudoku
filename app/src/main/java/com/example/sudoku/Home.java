@@ -2,12 +2,14 @@ package com.example.sudoku;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ public class Home extends AppCompatActivity {
     ArrayAdapter<String> adapterItems;
 
     static String selectedItem;
+    SQLLiteHelper myDB;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,11 +44,12 @@ public class Home extends AppCompatActivity {
             return insets;
         });
 
-        score = MainActivity.highestScore;
+        myDB = new SQLLiteHelper(this);
+        score = myDB.getHighestScore();
 
         highestScore = findViewById(R.id.highestScore);
-        if(score != 0){
-            highestScore.setText(score);
+        if(score > 0){
+            highestScore.setText(String.valueOf(score));
         }
         EditText name = findViewById(R.id.editTextUserName);
         try {
@@ -63,12 +67,15 @@ public class Home extends AppCompatActivity {
             Toast.makeText(Home.this,"Item" + selectedItem,Toast.LENGTH_SHORT).show();
         });
 
+
+
     }
 
     public void playActivity(View v){
         Intent i = new Intent(this, MainActivity.class);
+        i.addCategory("DEFAULT");
         i.putExtra("name",userName);
-        i.putExtra("score",String.valueOf(highestScore));
+        i.putExtra("score",String.valueOf(highestScore.getText()));
         startActivity(i);
     }
 

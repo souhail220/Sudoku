@@ -2,9 +2,10 @@ package com.example.sudoku;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.TextView;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ public class SQLLiteHelper extends SQLiteOpenHelper {
     private static final String columnScore = "Highest_score";
     public SQLLiteHelper(@Nullable Context context) {
         super(context, databaseName, null, databaseVersion);
+        Log.d("souha", "onCreate: database 1");
         this.context = context;
     }
 
@@ -34,6 +36,7 @@ public class SQLLiteHelper extends SQLiteOpenHelper {
                         columnName + " TEXT, " +
                         columnScore + " INTEGER);";
         db.execSQL(query);
+        Log.d("souha", "onCreate: create Table");
     }
 
     @Override
@@ -55,5 +58,18 @@ public class SQLLiteHelper extends SQLiteOpenHelper {
         } else{
             Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public int getHighestScore(){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT min("+columnScore+"),"+columnName+" FROM " + tableName, null);
+        if(cursor.getCount() == 0){
+            return -1;
+        }
+        cursor.moveToFirst();
+        int x = cursor.getInt(0);
+        Log.d("HomeAct", "dataBase Created: "+x);
+        cursor.close();
+        return x;
     }
 }

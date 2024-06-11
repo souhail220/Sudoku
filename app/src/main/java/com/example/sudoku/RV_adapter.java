@@ -44,7 +44,7 @@ public class RV_adapter extends RecyclerView.Adapter<RV_adapter.MyViewHolder> {
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        // grabbing the views from the recycle_view_row layout file
+        // grabbing the views from the recycler_view_row layout file
         // kinda look like  in the onCreate method
         ImageView imageView;
         TextView userName,userScore;

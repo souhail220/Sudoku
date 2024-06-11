@@ -27,15 +27,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d("souha", "onCreate: souha");
-        gameScore = dialog.findViewById(R.id.gameScore);
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
 
-        highestScore = Integer.parseInt(intent.getStringExtra("score"));
+        String str = intent.getStringExtra("score");
+        assert str != null;
+        if(str.equals("_ _ _")){
+            highestScore = 2000;
+        }else {
+            highestScore = Integer.parseInt(str);
+        }
 
         dialog = new Dialog(MainActivity.this);
         dialog.setContentView(R.layout.custom_dialog_box);
+
+        gameScore = dialog.findViewById(R.id.gameScore);
 
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -44,12 +50,16 @@ public class MainActivity extends AppCompatActivity {
         dialogBtnHome = dialog.findViewById(R.id.dialog_button_home);
 
         dialogBtnHome.setOnClickListener(v -> {
-            SQLLiteHelper myDB = new SQLLiteHelper(MainActivity.this);
-            int x = Integer.parseInt(String.valueOf(gameScore));
-            if (x<highestScore){
-                highestScore = x;
-                myDB.addUser(1,name,highestScore);
+            try (SQLLiteHelper myDB = new SQLLiteHelper(MainActivity.this)) {
+                Log.d("souha", "onCreate: dataBase");
+                int x = Integer.parseInt(String.valueOf(gameScore.getText()));
+                if (x <= highestScore && name != null) {
+                    highestScore = x;
+                    myDB.addUser(1, name, highestScore);
+                    Log.d("souha", "onCreate: added score"+x);
+                }
             }
+
             dialog.dismiss();
             Intent i = new Intent(MainActivity.this, Home.class);
             startActivity(i);
@@ -59,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static void showDialog(){
         dialog.show();
-        String string = (String) gameScore.getText() + GameView.score;
-        gameScore.setText(string);
+        gameScore.setText(String.valueOf(GameView.score));
     }
 
 }

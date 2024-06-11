@@ -6,19 +6,11 @@ import org.jetbrains.annotations.Contract;
 
 public class GameBoard extends Sudoku {
 
-    GameBoard(int N) {
-        super(N);
-    }
-
     public static class GameCell{
         public int realValue;
         public int assumedValue;
-        public boolean isInitial = false;
+        public boolean isInitial;
         public boolean [] marks = {false,false,false,false,false,false,false,false,false};
-
-        public GameCell(int realValue){
-            this.realValue = realValue;
-        }
 
         public GameCell(int realValue,boolean isInitial){
             this.realValue = realValue;
@@ -185,5 +177,4 @@ public class GameBoard extends Sudoku {
                 throw new RuntimeException("Not yet Implemented");
         }
     }
-
 }
