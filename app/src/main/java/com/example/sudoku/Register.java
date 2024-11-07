@@ -17,14 +17,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class Register extends AppCompatActivity {
 
@@ -73,22 +68,19 @@ public class Register extends AppCompatActivity {
             }
 
             myAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressBar.setVisibility(View.GONE);
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Intent intent = new Intent(getApplicationContext(),Leadboard.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w("TAG", "createUserWithEmail:failure", task.getException());
-                                Log.d("yacine", "failed");
-                                Toast.makeText(Register.this, "Authentication failed.",
-                                        Toast.LENGTH_LONG).show();
-                            }
+                    .addOnCompleteListener(this, task -> {
+                        progressBar.setVisibility(View.GONE);
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Intent intent = new Intent(getApplicationContext(),Leadboard.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("TAG", "createUserWithEmail:failure", task.getException());
+                            Log.d("yacine", "failed");
+                            Toast.makeText(Register.this, "Authentication failed.",
+                                    Toast.LENGTH_LONG).show();
                         }
                     });
         });
